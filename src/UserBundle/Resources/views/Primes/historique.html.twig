@@ -1,0 +1,51 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+<section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Gestion des primes</h3>
+        <!-- row -->
+        <div class="row mt">
+          <div class="col-md-12">
+            <div class="content-panel">
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i>Historique personnel des primes</h4>
+                <hr>
+                <thead>
+                  <tr>
+                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Type Prime</th>
+                    <th><i class=" fa fa-calendar-o"></i> Date de demande</th>
+                    <th><i class=" fa fa-status"></i> Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  {% for demande in demandes %}
+                  <tr>
+                    <td>{{ demande.type }}</td>
+                    <td>{{ demande.dateDemande|date('d-m-y') }}</td>
+                    {% if demande.status == 1 %}
+                    <td><span class="label label-success label-mini">Accordé</span></td>
+                    {% elseif demande.status == 0 %}
+                    <td><span class="label label-danger label-mini">Refusé</span></td>
+                    {% else %}
+                    <td><span class="label label-info label-mini">En cours</span></td>
+                    {% endif %}
+                 </tr>
+                 {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+      </section>
+    </section>
+
+
+{% endblock %}

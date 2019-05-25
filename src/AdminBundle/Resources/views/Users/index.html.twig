@@ -1,0 +1,98 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+
+  <section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Liste des employés / responsables</h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Employés</h4>
+              <section id="unseen">
+                <table class="table table-bordered table-striped table-condensed">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th class="numeric">Date de naissance</th>
+                      <th class="numeric">Email</th>
+                      <th class="numeric">N° Télephone</th>
+                      <th class="numeric">Etat Civil</th>
+                      <th class="numeric">Grade</th>
+                      <th class="numeric">Adresse</th>
+                      <th class="numeric">Nombre d'enfants</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for employe in employes  %}
+                    <tr>
+                       <td data-title="Code">{{ employe.firstName }}</td>
+                      <td data-title="Code">{{ employe.lastName }}</td>
+                      <td data-title="Code">{{ employe.Email }}</td>
+                      <td data-title="Code">{{ employe.dateOfBirth|date('d-m-y') }}</td>
+                      <td data-title="Code">{{ employe.tel }}</td>
+                      <td data-title="Code">{{ employe.civilStatus }}</td>
+                      <td data-title="Code">{{ employe.grade }}</td>
+                      <td data-title="Code">{{ employe.adress }}</td>
+                      <td data-title="Code">{{ employe.nbChildren }}</td>
+                    </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-lg-4 -->
+        </div>
+        <!-- /row -->
+        <div class="row mt">
+          <div class="col-lg-12">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> Responsables</h4>
+              <section id="no-more-tables">
+                <table class="table table-bordered table-striped table-condensed cf">
+                  <thead class="cf">
+                    <tr>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th class="numeric">Date de naissance</th>
+                      <th class="numeric">Email</th>
+                      <th class="numeric">N° Télephone</th>
+                      <th class="numeric">Etat Civil</th>
+                      <th class="numeric">Grade</th>
+                      <th class="numeric">Adresse</th>
+                      <th class="numeric">Nombre d'enfants</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for responsable in responsables  %}
+                      <tr>
+                      <td data-title="Code">{{ responsable.firstName }}</td>
+                      <td data-title="Code">{{ responsable.lastName }}</td>
+                      <td data-title="Code">{{ responsable.Email }}</td>
+                      <td data-title="Code">{{ responsable.dateOfBirth|date('d-m-y') }}</td>
+                      <td data-title="Code">{{ responsable.tel }}</td>
+                      <td data-title="Code">{{ responsable.civilStatus }}</td>
+                      <td data-title="Code">{{ responsable.grade }}</td>
+                      <td data-title="Code">{{ responsable.adress }}</td>
+                      <td data-title="Code">{{ responsable.nbChildren }}</td>
+                    </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-lg-12 -->
+        </div>
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+
+
+{% endblock %}

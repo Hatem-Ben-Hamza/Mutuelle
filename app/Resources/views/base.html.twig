@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}République Tunisinne | ministère de l'intérieur!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('interieur_ZN8_icon.ico') }}" />
+        <link href="{{ asset('lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style-responsive.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('lib/jquery.backstretch.min.js') }}"></script>
+            <script>
+                $.backstretch("{{ asset('img/login-bg.jpg') }}", {
+                speed: 500
+                });
+            </script>
+        {% endblock %}
+    </body>
+</html>

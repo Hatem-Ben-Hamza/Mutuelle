@@ -1,0 +1,59 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+<section id="main-content">
+      <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Gestion des prets</h3>
+        <!-- row -->
+        <div class="row mt">
+          <div class="col-md-12">
+            <div class="content-panel">
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i> Liste des pret</h4>
+                <hr>
+                <thead>
+                  <tr>
+                    <th><i class="fa fa-bullhorn"></i> Employé</th>
+                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Type Pret</th>
+                    <th><i class="fa fa-bookmark"></i> Montant Pricipale</th>
+                    <th><i class=" fa fa-bookmark"></i> Montant interet</th>
+                    <th><i class=" fa fa-calendar-o"></i> Durée</th>
+                    <th><i class=" fa fa-status"></i> Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">Maram Trabelsi</a>
+                    </td>
+                    <td class="hidden-phone">Pret Immobilier</td>
+                    <td>120 000 DT </td>
+                    <td>145 000 DT </td>
+                    <td>15 ans</td>
+                    <td><span class="label label-info label-mini">En cours</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">Mohamed Khammesi</a>
+                    </td>
+                    <td class="hidden-phone">Pret Consommation</td>
+                    <td>25 000 DT </td>
+                    <td>28 500 DT </td>
+                    <td>3 ans</td>
+                    <td><span class="label label-warning label-mini">En retard</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /content-panel -->
+          </div>
+          <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+      </section>
+    </section>
+
+
+{% endblock %}

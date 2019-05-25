@@ -1,0 +1,224 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <h3 style="position: absolute;
+    top: 12%;
+    left: 15%;"><i class="fa fa-angle-right"></i> Demande de prime</h3>
+    <div id="surveyElement"></div>
+        <div id="surveyResult"></div>
+
+        <script type="text/javascript">
+
+            var surveyValueChanged = function (sender, options) {
+    var el = document.getElementById(options.name);
+    if (el) {
+        el.value = options.value;
+    }
+};
+
+Survey
+    .StylesManager
+    .applyTheme("default");
+
+Survey
+    .StylesManager
+    .applyTheme("default");
+
+var json = {
+    "pages": [
+        {
+            "name": "page1",
+            "elements": [
+               {
+                "type": "html",
+                "name": "info",
+                "html": "<table><body><tr><td><img src='{{ asset('img/image1.png') }}' id='img1'></td></tr><tr><td><img src='{{ asset('img/image.png') }}' id='img2'></td></tr></body></table>"
+               } 
+            ]
+        }, {
+            "name": "page2",
+            "elements": [
+                {
+            type: "dropdown",
+            name: "type_prime",
+            title: "Sélectionner le type du prime?",
+            colCount: 0,
+            //"isRequired":true,
+            choices: [
+                "Prime de bilan",
+                "Prime de rendement",
+                "Prime sur objectifs / résultats",
+                "13° mois",
+                "Prime d'ancienneté",
+                "Prime d'assiduité",
+                "Participation",
+                "Intéressement",
+                "Prime de mariage",
+                "Prime de naissance",
+                "Panier repas",    
+                "Prime de transport"
+            ]
+        }, {
+                    "type": "comment",
+                    "name": "product_fit_comment",
+                    "visibleIf": "{product_fit} notempty",
+                    "title": "Please help us understand why you selected the answer above"
+                }
+            ]
+        }, {
+            "name": "page3",
+            "elements": [
+                {
+                name: "nom",
+                type: "text",
+                title: "Saisir votre nom:",
+                placeHolder: "votre nom ici...",
+                },
+                 {
+                name: "prenom",
+                type: "text",
+                title: "Saisir votre prenom:",
+                placeHolder: "votre prenom ici...",
+                },
+                {
+                name: "birthdate",
+                type: "text",
+                inputType: "date",
+                title: "Votre Date de Naissance:",
+                },
+                {
+            name: "email",
+            type: "text",
+            inputType: "email",
+            title: "Votre Email:",
+            placeHolder: "jon.snow@nightwatch.org",
+            isRequired: true,
+            validators: [
+                {
+                    type: "email"
+                }
+            ]
+        },
+                {
+                name: "tel",
+                type: "text",
+                title: "Saisir votre N° de téléphone:",
+                placeHolder: "votre num ici...",
+                },
+
+                
+                {
+                name: "adress",
+                type: "text",
+                title: "Saisir votre adresse:",
+                placeHolder: "votre adresse ici...",
+                },
+
+            ]
+        }, {
+            "name": "page4",
+            "elements": [
+                {
+            "type": "imagepicker",
+            "name": "etat_civil",
+            "title": "Vous etes ?",
+            "choices": [
+                {
+                    "value": "single",
+                    "imageLink": "{{ asset('img/single.png') }}"
+                }, {
+                    "value": "married",
+                    "imageLink": "{{ asset('img/married.jpg') }}"
+                }, {
+                    "value": "divorced",
+                    "imageLink": "{{ asset('img/divorced.png') }}"
+                }, {
+                    "value": "widow",
+                    "imageLink": "{{ asset('img/widow.png') }}"
+                }
+            ]
+        },
+               {
+            "type": "imagepicker",
+            "name": "nb_children",
+            "title": "Combien avez-vous d'enfants ?",
+            "choices": [
+                {
+                    "value": "1",
+                    "imageLink": "{{ asset('img/one-child.png') }}"
+                }, {
+                    "value": "2",
+                    "imageLink": "{{ asset('img/two-children.png') }}"
+                }, {
+                    "value": "3",
+                    "imageLink": "{{ asset('img/community.png') }}"
+                }
+            ]
+        },
+            ]
+        }, {
+            "name": "page5",
+            "elements": [
+                {
+            type: "dropdown",
+            name: "grade",
+            title: "Votre grade?",
+            colCount: 0,
+            choices: [
+                "Employé",
+                "Responsable",
+            ]
+        },
+                {
+            "type": "editor",
+            "name": "ckeditor",
+            "title": "Saisir votre demande de prime"
+        },
+
+        {
+            "type": "signaturepad",
+            "name": "sign",
+            "title": "Veuillez taper votre signature"
+        },
+
+        {
+            "type": "emotionsratings",
+            "name": "emotionsratings-widget",
+            "title": "Votre degré de statisfaction",
+            "choices": ["1", "2", "3", "4", "5"]
+        }
+            ]
+        }
+    ]
+};
+
+window.survey = new Survey.Model(json);
+
+survey
+    .onComplete
+    .add(function (result) {
+        /*document
+            .querySelector('#surveyResult')
+            .innerHTML = "result: " + JSON.stringify(result.data);*/
+         $.ajax({
+                    url: "{{ path('demandePrime') }}",
+                    type: "POST",
+                    data: JSON.stringify(result.data),
+                    contentType: "application/json",
+                    success: function (data)
+                    {
+                        console.log('success');
+                    }
+                });
+    });
+
+$("#surveyElement").Survey({model: survey});
+
+survey.locale = 'fr';
+
+$("#surveyElement").Survey({model: survey, onValueChanged: surveyValueChanged});
+
+        </script>
+    
+{% endblock %} 
+    

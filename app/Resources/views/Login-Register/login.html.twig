@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<div id="login-page">
+    <div class="container">
+      <form class="form-login" action="{{ path("fos_user_security_check") }}" method="post">
+         {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        {% endif %}
+        <h2 class="form-login-heading">Se connecter maintenant</h2>
+        <div class="login-wrap">
+          <input type="text" name="_username" class="form-control" placeholder="Nom d'utilisateur" autofocus>
+          <br>
+          <input type="password" class="form-control" name="_password" placeholder="Mot de passe">
+          <label class="checkbox" style="display:none">
+            <input type="checkbox" value="remember-me" name="_remember_me"> Remember me
+            <span class="pull-right">
+            <a data-toggle="modal" href="login.html#myModal"> Mot de passe oublié ?</a>
+            </span>
+            </label>
+            <br>
+          <button class="btn btn-theme btn-block" name="_submit" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+          <hr>
+          <div class="registration">
+            Vous n'avez pas de compte ?<br/>
+            <a class="" href="/register">
+              S'inscrire
+              </a>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Mot de passe oublié ?</h4>
+              </div>
+              <div class="modal-body">
+                <p>Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.</p>
+                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+              </div>
+              <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
+                <button class="btn btn-theme" type="button">Réinitialiser</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal -->
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

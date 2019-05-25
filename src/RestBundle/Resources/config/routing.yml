@@ -1,0 +1,11 @@
+rest_homepage:
+    path:     /test
+    defaults: { _controller: RestBundle:Default:index }
+
+rest_todos:
+    path:     /todos
+    defaults: { _controller: RestBundle:Default:todos }
+
+rest_createtodos:
+    path:     /createTodo
+    defaults: { _controller: RestBundle:Default:createTodo }

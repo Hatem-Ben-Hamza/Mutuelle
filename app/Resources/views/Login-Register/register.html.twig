@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="login-page">
+    <div class="container">
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-login'}}) }}
+        <h2 class="form-login-heading">S'inscrire maintenant</h2>
+        <div class="login-wrap">
+        {{ form_row(form.username,{'attr': {'class': 'form-control','placeholder':"Nom d'utilisateur"},'label':false}) }}<br>
+        {{ form_row(form.email,{'attr': {'class': 'form-control','placeholder':'Email'},'label':false}) }}<br>
+        {{ form_row(form.plainPassword.first,{'attr': {'class': 'form-control','placeholder':'Mot de passe'},'label':false}) }}<br>
+        {{ form_row(form.plainPassword.second,{'attr': {'class': 'form-control','placeholder':'Confirmation de mot de passe'},'label':false}) }}<br>
+        <button class="btn btn-theme btn-block" name="_submit" type="submit"><i class="fa fa-lock"></i> S'inscrire</button>
+    {{ form_end(form) }}
+     <hr>
+          <div class="registration">
+            Vous avez déja un compte ?<br/>
+            <a class="" href="/login">
+              Se connecter
+              </a>
+          </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

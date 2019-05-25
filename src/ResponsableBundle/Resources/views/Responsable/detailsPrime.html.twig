@@ -1,0 +1,57 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+
+  <section id="main-content">
+      <section class="wrapper">
+        <div class="col-lg-12 mt">
+          <div class="row content-panel">
+            <div class="col-lg-10 col-lg-offset-1">
+            <a href="{{ path('responsableprimes') }}" class="btn btn-info">
+                    <i class="fa fa-undo"></i>
+                    <span>Retour</span>
+                    </a>
+                    <a href="{{ path('responsableprimesAccept',{'id':prime.id}) }}" class="btn btn-success">
+                    <i class="fa fa-check"></i>
+                    <span>Accepter</span>
+                    </a>
+                  <a href="{{ path('responsableprimesRefuse',{'id':prime.id}) }}" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                    <span>Refuser</span>
+                    </a>
+              <div class="invoice-body">
+                <div class="pull-left">
+                  <h1>Prime #{{ prime.id }}</h1>
+                   <h4>{{ prime.DateDemande|date('d-m-y') }}</h4>
+                </div>
+                <!-- /pull-left -->
+                <div class="pull-right">
+                  <h2>Signature</h2>
+                  <img src="{{ prime.signature }}">
+                </div>
+                <!-- /pull-right -->
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <h4>{{ prime.getUser().firstname }} {{ prime.getUser().lastname }}</h4>
+                    <address>
+                  <strong>{{ prime.getUser().grade }}</strong><br>
+                  {{ prime.getUser().adress }}<br>
+                  <abbr title="Phone">N°:</abbr> {{ prime.getUser().tel }}
+                </address>
+                  </div>
+                  <!-- /col-md-9 -->
+                  
+                </div>
+                <!-- /col-lg-10 -->
+                {{ prime.demande | raw }}
+                <br>
+                <br>
+              </div>
+              <!--/col-lg-12 mt -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+
+
+{% endblock %}
