@@ -3,15 +3,21 @@
 {% block body %}
 
 <h1>Contacter un responssable</h1>
+
 <section id="main-content">
       <section class="wrapper">
+      {% for flashMessage in app.session.flashbag.get('success') %}
+
+<div class="alert alert-success">{{ flashMessage }}.</div>
+
+{% endfor %}
         <h3><i class="fa fa-angle-right"></i>Contacter un responsable</h3>
         <div class="row mt">
           <div class="col-lg-12">
             <div class="content-panel">
               <h4><i class="fa fa-angle-right"></i> Cordonnées du message</h4>
               <section id="unseen">
-<form action="" method="post">
+<form action="{{ path('ContactResponsable') }}" method="post">
 
 <div class="form-group" style="margin:0 1rem;">
 <label>Sujet</label>
@@ -22,15 +28,20 @@
 <textarea  name="message" class="form-control">
 </textarea>
 </div>
+<br>
 <div class="form-group" style="margin:0 1rem;" >
-<select name="resp">
-{% for responsable in responsables %}
-<option value="{{ responsables.username }}">{{ responsables.username }}</option>
+<select class="form-control" name="resp">
+                  {% for responsable in responsables %}
+{% if responsable.roles[0] == 'ROLE_RESPONSABLE' %}
+<option value="{{ responsable.getUsername() }}">{{ responsable.getUsername() }}</option>
+{% endif %}
 {% endfor %}
-</select>
+    </select>
 </div>
-</form>
-
+<br>
+<div class="form-group" style="margin:0 1rem;" >
+<button type="submit" class="btn btn-theme">Envoyer</button></form>
+</div>
 </section>
             </div>
             <!-- /content-panel -->

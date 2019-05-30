@@ -289,6 +289,13 @@
               <span>Historique des crédits</span>
               </a>
           </li>
+
+           <li class="mt">
+            <a href="/ContactResponsable" {% if app.request.get('_route') == 'ContactResponsable' %} class="active" {% endif %}>
+              <i class="fa fa-envelope-o"></i>
+              <span>Contacter un responsable</span>
+              </a>
+          </li>
           {% endif %}
            {% if is_granted('ROLE_USER') and is_granted('ROLE_RESPONSABLE') and  (is_granted('ROLE_ADMIN') == false) %}
           <li class="mt">
@@ -301,6 +308,13 @@
             <a href="/responsable/credits" {% if app.request.get('_route') == 'responsablecredits' or app.request.get('_route') == 'responsableprimesDetails' %} class="active" {% endif %}>
               <i class="fa fa-history"></i>
               <span>Gestion des Crédits</span>
+              </a>
+          </li>
+
+          <li class="mt">
+            <a href="/responsable/messages" {% if app.request.get('_route') == 'responsablemessagesDetails' or app.request.get('_route') == 'responsableprimesDetails' %} class="active" {% endif %}>
+              <i class="fa fa-envelope-o"></i>
+              <span>Liste des messages</span>
               </a>
           </li>
           {% endif %}

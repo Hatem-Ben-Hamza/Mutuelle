@@ -122,5 +122,54 @@ class ResponsableController extends Controller
         return $this->redirect($this->generateUrl('responsablecredits'));
     }
 
+    /**
+     * @Route("/responsable/messages",name="responsablemessagesDetails")
+     */
+    public function MessagesAction()
+    {
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_RESPONSABLE');
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $contacts = $em->getRepository('AppBundle:Contact')->findBy(array(
+            'status' => 'non lus'
+        ));
+        return $this->render('ResponsableBundle:Responsable:contact_list.html.twig',array(
+            'contacts' => $contacts
+        ));
+    }
+
+    /**
+     * @Route("/responsable/message{id}/delete",name="responsablemessagedelete")
+     */
+    public function responsablemessagedeleteAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $contact = $em->getRepository('AppBundle:Contact')->find($id);
+        $em->remove($contact);
+        $em->flush();
+        $this->get('session')->getFlashBag()->set('success', 'Message supprimé avec succées');
+
+        return $this->redirect($this->generateUrl('responsablemessagesDetails'));
+    }
+
+    /**
+     * @Route("/responsable/message{id}/archiv",name="responsablemessagearchive")
+     */
+    public function responsablemessagearchiveAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $contact = $em->getRepository('AppBundle:Contact')->find($id);
+        $contact->setStatus('Archivé');
+        $em->persist($contact);
+        $em->flush();
+        $this->get('session')->getFlashBag()->set('success', 'Message archivé avec succées');
+
+        return $this->redirect($this->generateUrl('responsablemessagesDetails'));
+    }
+
 
 }

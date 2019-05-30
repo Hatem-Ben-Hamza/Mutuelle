@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Prime;
+use AppBundle\Entity\Contact;
 
 
 class PrimeController extends Controller
@@ -82,13 +83,23 @@ class PrimeController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
     
-            $repository = $em->getRepository('AppBundle:User');
-            $query = $repository->createQueryBuilder('u')
-                    ->where('u.roles LIKE :roles')
-                    ->setParameter('roles', '%ROLE_RESPONSABLE')
-                    ->getQuery();
-            $responsables = $query->getResult();
-            var_dump($responsables);die();
+        $responsables = $em->getRepository('AppBundle:User')->findAll();
+        if(!empty($request->request->get('subject')) && !empty($request->request->get('message'))){
+            $contact = new Contact();
+            $contact->setSubject($request->request->get('subject'));
+            $contact->setMessage($request->request->get('message'));
+            $contact->setUser($this->getUser()->getUsername());
+            $contact->setResponsable($request->request->get('resp'));
+            $contact->setStatus('non lus');
+            $em->persist($contact);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Votre message à été bien envoyé');
+            return $this->render('UserBundle:Default:contact.html.twig',array(
+                'user' => $this->getUser()->getUsername(),
+                'responsables' => $responsables
+            ));
+        }
         return $this->render('UserBundle:Default:contact.html.twig',array(
             'user' => $this->getUser()->getUsername(),
             'responsables' => $responsables
