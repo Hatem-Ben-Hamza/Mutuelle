@@ -57,7 +57,8 @@ var json = {
                 "Prime de naissance",
                 "Panier repas",    
                 "Prime de transport"
-            ]
+            ],
+             isRequired: true,
         }, {
                     "type": "comment",
                     "name": "product_fit_comment",
@@ -73,18 +74,21 @@ var json = {
                 type: "text",
                 title: "Saisir votre nom:",
                 placeHolder: "votre nom ici...",
+                isRequired: true,
                 },
                  {
                 name: "prenom",
                 type: "text",
                 title: "Saisir votre prenom:",
                 placeHolder: "votre prenom ici...",
+                isRequired: true,
                 },
                 {
                 name: "birthdate",
                 type: "text",
                 inputType: "date",
                 title: "Votre Date de Naissance:",
+                isRequired: true,
                 },
                 {
             name: "email",
@@ -104,6 +108,7 @@ var json = {
                 type: "text",
                 title: "Saisir votre N° de téléphone:",
                 placeHolder: "votre num ici...",
+                isRequired: true,
                 },
 
                 
@@ -112,6 +117,7 @@ var json = {
                 type: "text",
                 title: "Saisir votre adresse:",
                 placeHolder: "votre adresse ici...",
+                isRequired: true,
                 },
 
             ]
@@ -122,6 +128,7 @@ var json = {
             "type": "imagepicker",
             "name": "etat_civil",
             "title": "Vous etes ?",
+            isRequired: true,
             "choices": [
                 {
                     "value": "single",
@@ -153,7 +160,7 @@ var json = {
                     "value": "3",
                     "imageLink": "{{ asset('img/community.png') }}"
                 }
-            ]
+            ],isRequired: true,
         },
             ]
         }, {
@@ -167,25 +174,29 @@ var json = {
             choices: [
                 "Employé",
                 "Responsable",
-            ]
+            ],
+            isRequired: true,
         },
                 {
             "type": "editor",
             "name": "ckeditor",
-            "title": "Saisir votre demande de prime"
+            "title": "Saisir votre demande de prime",
+            isRequired: true,
         },
 
         {
             "type": "signaturepad",
             "name": "sign",
-            "title": "Veuillez taper votre signature"
+            "title": "Veuillez taper votre signature",
+            isRequired: true,
         },
 
         {
             "type": "emotionsratings",
             "name": "emotionsratings-widget",
             "title": "Votre degré de statisfaction",
-            "choices": ["1", "2", "3", "4", "5"]
+            "choices": ["1", "2", "3", "4", "5"],
+            isRequired: true,
         }
             ]
         }

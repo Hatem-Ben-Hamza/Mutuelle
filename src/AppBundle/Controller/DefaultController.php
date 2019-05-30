@@ -15,10 +15,24 @@ class DefaultController extends Controller
     {
         $securityContext = $this->container->get('security.authorization_checker');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            if ($securityContext->isGranted('ROLE_USER') && (!$securityContext->isGranted('ROLE_RESPONSABLE')) ){
+            if (
+                ($securityContext->isGranted('ROLE_USER'))
+                 && !($securityContext->isGranted('ROLE_RESPONSABLE'))
+                  && !($securityContext->isGranted('ROLE_ADMIN'))
+            ){
                 return $this->redirect($this->generateUrl('userhomepage'));
-            }else{
+            }elseif (
+                ($securityContext->isGranted('ROLE_USER'))
+             && ($securityContext->isGranted('ROLE_RESPONSABLE'))
+              && !($securityContext->isGranted('ROLE_ADMIN'))
+            ){
                 return $this->redirect($this->generateUrl('responsableprimes'));
+            }elseif(
+                ($securityContext->isGranted('ROLE_USER'))
+                && !($securityContext->isGranted('ROLE_RESPONSABLE')) 
+                && ($securityContext->isGranted('ROLE_ADMIN'))
+            ){
+                return $this->redirect($this->generateUrl('list_users'));
             }
         }
             else{

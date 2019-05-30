@@ -74,4 +74,24 @@ class PrimeController extends Controller
             'demandes' => $demandes
         ));
     }
+
+     /**
+     * @Route("/ContactResponsable",name="ContactResponsable")
+     */
+    public function ContactResponsableAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+    
+            $repository = $em->getRepository('AppBundle:User');
+            $query = $repository->createQueryBuilder('u')
+                    ->where('u.roles LIKE :roles')
+                    ->setParameter('roles', '%ROLE_RESPONSABLE')
+                    ->getQuery();
+            $responsables = $query->getResult();
+            var_dump($responsables);die();
+        return $this->render('UserBundle:Default:contact.html.twig',array(
+            'user' => $this->getUser()->getUsername(),
+            'responsables' => $responsables
+        ));
+    }
 }

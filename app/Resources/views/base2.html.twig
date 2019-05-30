@@ -259,11 +259,11 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="{{ asset('img/admin.png') }}" class="img-circle" width="80"></a>
+            <a href="/"><img src="{{ asset('img/admin.png') }}" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Fatma Lajmi</h5><span style="position: relative;
-    left: 30%;">Responsable</span>
-        {% if is_granted('ROLE_USER') and (is_granted('ROLE_RESPONSABLE') == false) %}
+          <h5 class="centered">{% if app.user.firstname != null and app.user.lastname != null  %}{{ app.user.firstname }} {{ app.user.lastname }}{% else %}{{ app.user.username }}{% endif %}</h5><span style="position: relative;
+    left: 30%;text-transform:capitalize">{% if  app.user.roles[0] == 'ROLE_USER'  %}Utilisateur{% elseif app.user.roles[0] == 'ROLE_RESPONSABLE'  %}Responsable{% else %}Administrateur{% endif %}</span>
+        {% if is_granted('ROLE_USER') and (is_granted('ROLE_RESPONSABLE') == false) and  (is_granted('ROLE_ADMIN') == false) %}
           <li class="mt">
             <a href="/user/primes" {% if app.request.get('_route') == 'userhomepage' %} class="active" {% endif %}>
               <i class="fa fa-sticky-note"></i>
@@ -290,29 +290,21 @@
               </a>
           </li>
           {% endif %}
-          {% if is_granted('ROLE_RESPONSABLE')  %}
+           {% if is_granted('ROLE_USER') and is_granted('ROLE_RESPONSABLE') and  (is_granted('ROLE_ADMIN') == false) %}
           <li class="mt">
             <a href="/responsable/primes" {% if app.request.get('_route') == 'responsableprimes' or app.request.get('_route') == 'responsableprimesDetails' %} class="active" {% endif %}>
               <i class="fa fa-history"></i>
               <span>Gestion des primes</span>
               </a>
           </li>
-          <li class="sub-menu dcjq-parent-li">
-            <a class="dcjq-parent" href="javascript:;">
-              <i class="fa fa-th"></i>
-              <span>Gestion des prets</span>
-              <span class="dcjq-icon"></span></a>
-            <ul class="sub" style="display: block;">
-              <li class="">
-                <a href="basic_table.html">Liste des prets en cours</a>
-              </li>
-              <li >
-                <a href="advanced_table.html">Liste des demandes des prets</a>
-              </li>
-            </ul>
+          <li class="mt">
+            <a href="/responsable/credits" {% if app.request.get('_route') == 'responsablecredits' or app.request.get('_route') == 'responsableprimesDetails' %} class="active" {% endif %}>
+              <i class="fa fa-history"></i>
+              <span>Gestion des Crédits</span>
+              </a>
           </li>
           {% endif %}
-          {% if is_granted('ROLE_ADMIN') %}
+           {% if is_granted('ROLE_USER') and (is_granted('ROLE_RESPONSABLE') == false) and is_granted('ROLE_ADMIN') %}
             <li class="mt">
             <a href="/users" {% if app.request.get('_route') == 'list_users' %}class="active" {% endif %}>
               <i class="fa fa-history"></i>
